@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+:root {
+    --cor-borda: #077ddd7a;
+    --cor-botao-enviar: #3180F9;
+    --cor-background: rgb(240, 240, 240);
+}
+
+*{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+#imagem {
+    display: none;
+} 
+
+#tela-inicial {
+    background-color: var(--cor-background);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#logo {
+    width: 300px;
+    height: 200px;
+    background: url('../../imagens/Jaspe-logo.png') no-repeat;
+    background-size: cover;
+}
+
+#login {
+    width: 300px;
+    text-align: center;
+}
+
+#login p {
+    margin-top: 20px;
+}
+
+#usuario {
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+}
+
+#senha {
+    border: 2px solid var(--cor-borda);
+    border-radius: 5px;
+    width: 300px;
+    height: 40px;
+}
+
+#enviar {
+    width: 300px;
+    height: 40px;
+    border: 0px;
+    border-radius: 10px;
+    background-color: var(--cor-botao-enviar);
+    color: white;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+a{
+    text-decoration: none;
+    
+}
