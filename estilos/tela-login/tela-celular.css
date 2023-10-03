@@ -12,12 +12,15 @@
     margin: 0;
 }
 
+main {
+    background-color: var(--cor-background);
+}
+
 #imagem {
     display: none;
 } 
 
 #tela-inicial {
-    background-color: var(--cor-background);
     display: flex;
     flex-direction: column;
     justify-items: center;
