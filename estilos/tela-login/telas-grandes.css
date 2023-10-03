@@ -16,6 +16,7 @@
     }
 
     #imagem {
+        background-color: var(--cor-background);
         display: block;
         background: url("../../imagens/imagem-vidro.png") no-repeat;
         background-size: contain;
