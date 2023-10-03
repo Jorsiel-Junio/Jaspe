@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
 @media screen and (min-width: 992px) {
+    :root {
+        --cor-background: rgb(240, 240, 240);
+    }
     main {
+        background-color: var(--cor-background);
         display: flex;
         flex-direction: row;
         justify-items: center;
