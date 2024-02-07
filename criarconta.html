@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/telacriar/telacriar.css">
+    <title>Criar Conta</title>
+</head>
+<body>
+    <main>
+        <div id="imagem">
+
+        </div>
+        <div id="tela-inicial">
+            <div id="logo">
+
+            </div>
+            <div id="cadastro">
+                <form action="cadastro.js" id="formulario" method="post">
+                    <p>
+                        <label for="usuario">Usuário:</label></br>
+                        <input type="text" name="usuario" id="usuario" required>
+                    </p>
+                    <p>
+                        <label for="email">E-mail:</label></br>
+                        <input type="email" name="email" id="email" required>
+                    </p>
+                    <p>
+                        <label for="senha">Senha:</label></br>
+                        <input type="password" name="senha" id="senha">
+                    </p>
+                    <p>
+                        <label for="consenha">Confirme sua senha:</label></br>
+                        <input type="password" name="consenha" id="consenha">
+                    </p>
+                    <p>
+                        <input type="submit" value="Cadastrar" id="cadastrar">
+                    </p>
+                    <p>
+                        <a href="index.html">Login</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="cadastro.js"></script>
+</body>
+</html>
