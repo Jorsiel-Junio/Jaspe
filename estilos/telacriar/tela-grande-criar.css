@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+@media screen and (min-width: 992px) {
+    main {
+        background-color: var(--cor-background);
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #imagem {
+        display: block;
+        background: url(../../imagens/imagem-vidro.png) no-repeat;
+        background-size: contain;
+        margin-top: 10vh;
+        margin-left: 10vw;
+        width: 500px;
+        height: 500px;
+    }
+
+    #tela-inicial{ 
+        width: 50vw;
+    }
+
+    .span {
+        display: none;
+    }
+}

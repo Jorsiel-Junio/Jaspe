@@ -12,22 +12,10 @@
 
 main {
     background-color: var(--cor-background);
-    display: flex;
-    flex-direction: row;
-    justify-items: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
 }
 
 #imagem {
-    display: block;
-    background: url(../../imagens/imagem-vidro.png) no-repeat;
-    background-size: contain;
-    margin-top: 10vh;
-    margin-left: 10vw;
-    width: 500px;
-    height: 500px;
+    display: none;
 }
 
 #tela-inicial {
@@ -36,7 +24,6 @@ main {
     justify-items: center;
     align-items: center;
     height: 100vh;
-    width: 50vw;
 }
 
 #logo {
@@ -92,4 +79,11 @@ p {
     color: white;
     font-weight: bolder;
     font-size: large;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: larger;
+    font-weight: 400;
 }

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos/telacriar/telacriar.css">
+    <link rel="stylesheet" href="estilos/telacriar/tela-celular-criar.css">
+    <link rel="stylesheet" href="estilos/telacriar/tela-grande-criar.css">
     <title>Criar Conta</title>
 </head>
 <body>
@@ -16,22 +17,26 @@
 
             </div>
             <div id="cadastro">
-                <form action="cadastro.js" id="formulario" method="post">
+                <form action="cadastro.js" id="cadastro" method="post">
                     <p>
                         <label for="usuario">Usuário:</label></br>
-                        <input type="text" name="usuario" id="usuario" required>
+                        <input type="text" name="usuario" id="usuario" required oninput="validarNome()">
+                        <span class="span">Digite um nome de usuário!</span>
                     </p>
                     <p>
                         <label for="email">E-mail:</label></br>
                         <input type="email" name="email" id="email" required>
+                        <span class="span"">Digite um E-mail valido!</span>
                     </p>
                     <p>
                         <label for="senha">Senha:</label></br>
-                        <input type="password" name="senha" id="senha">
+                        <input type="password" name="senha" id="senha" required minlength="8">
+                        <span class="span">Mínimo 8 digitos!</span>
                     </p>
                     <p>
                         <label for="consenha">Confirme sua senha:</label></br>
-                        <input type="password" name="consenha" id="consenha">
+                        <input type="password" name="consenha" id="consenha" required>
+                        <span class="span">As senhas não correspondem!</span>
                     </p>
                     <p>
                         <input type="submit" value="Cadastrar" id="cadastrar">
@@ -43,6 +48,6 @@
             </div>
         </div>
     </main>
-    <script src="cadastro.js"></script>
+    <script src="javascript/validacao.js"></script>
 </body>
 </html>
