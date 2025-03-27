@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento de Vidro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .resultado {
+            margin-top: 10px;
+            font-weight: bold;
+            color: green;
+        }
+        .orcamento-container {
+            margin-top: 20px;
+            border-top: 2px solid #000;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Selecione o tipo de vidro:</h2>
+    
+    <label>
+        <input type="radio" name="tipoVidro" value="temperado" onclick="mostrarFormulario('temperado')"> Vidro Temperado
+    </label>
+    <label>
+        <input type="radio" name="tipoVidro" value="comum" onclick="mostrarFormulario('comum')"> Vidro Comum
+    </label>
+
+    <!-- Formulário para vidro comum -->
+    <div id="formComum" class="form-container">
+        <h3>Orçamento - Vidro Comum</h3>
+        <form action="vidrocomum">
+            <label for="modelovidro">Tipo do Vidro</label>
+            <select name="modelovidro" id="modelovidroComum">
+                <option value="canelado">Canelado</option>
+                <option value="liso">Liso</option>
+                <option value="fume">Fumê</option>
+                <option value="mineboreal">Mineboreal</option>
+                <option value="pontilhado">Pontilhado</option>
+                <option value="espelho">Espelho</option>
+            </select>
+            <br><br>
+
+            <label for="espessuraComum">Espessura:</label>
+            <select id="espessuraComum" onchange="calcularPreco('comum')">
+                <option value="100">3mm</option>
+                <option value="130">4mm</option>
+                <option value="160">5mm</option>
+                <option value="200">6mm</option>
+                <option value="250">8mm</option>
+                <option value="300">10mm</option>
+            </select>
+            <br><br>
+
+            <label for="larguraComum">Largura (m):</label>
+            <input type="number" id="larguraComum" step="0.01" onchange="calcularPreco('comum')">
+            <br><br>
+
+            <label for="alturaComum">Altura (m):</label>
+            <input type="number" id="alturaComum" step="0.01" onchange="calcularPreco('comum')">
+            <br><br>
+
+            <label for="quantidadeComum">Quantidade:</label>
+            <input type="number" id="quantidadeComum" min="1" value="1" onchange="calcularPreco('comum')">
+            <br><br>
+
+            <label for="valorComum">Valor do metro quadrado (R$):</label>
+            <input type="number" id="valorComum" step="0.01" onchange="calcularPreco('comum')">
+            <br><br>
+
+            <p class="resultado" id="precoComum"></p>
+            <button type="button" onclick="adicionarAoOrcamento('comum')">Adicionar ao orçamento</button>
+        </form>
+    </div>
+
+    <!-- Formulário para vidro temperado -->
+    <div id="formTemperado" class="form-container">
+        <h3>Orçamento - Vidro Temperado</h3>
+        <form action="vidrotemp">
+            <label for="modelovidroTemp">Tipo do Vidro</label>
+            <select name="modelovidro" id="modelovidroTemp">
+                <option value="incolor">Incolor</option>
+                <option value="fume">Fumê</option>
+                <option value="verde">Verde</option>
+                <option value="bronze">Bronze</option>
+            </select>
+            <br><br>
+
+            <label for="espessuraTemp">Espessura:</label>
+            <select id="espessuraTemp" onchange="calcularPreco('temperado')">
+                <option value="200">6mm</option>
+                <option value="250">8mm</option>
+                <option value="300">10mm</option>
+            </select>
+            <br><br>
+
+            <label for="larguraTemp">Largura (m):</label>
+            <input type="number" id="larguraTemp" step="0.01" onchange="calcularPreco('temperado')">
+            <br><br>
+
+            <label for="alturaTemp">Altura (m):</label>
+            <input type="number" id="alturaTemp" step="0.01" onchange="calcularPreco('temperado')">
+            <br><br>
+
+            <label for="quantidadeTemp">Quantidade:</label>
+            <input type="number" id="quantidadeTemp" min="1" value="1" onchange="calcularPreco('temperado')">
+            <br><br>
+
+            <label for="valorTemp">Valor do metro quadrado (R$):</label>
+            <input type="number" id="valorTemp" step="0.01" onchange="calcularPreco('temperado')">
+            <br><br>
+
+            <p class="resultado" id="precoTemperado"></p>
+            <button type="button" onclick="adicionarAoOrcamento('temperado')">Adicionar ao orçamento</button>
+        </form>
+    </div>
+
+    <!-- Lista de pré-orçamento -->
+    <div class="orcamento-container">
+        <h3>Pré-Orçamento</h3>
+        <ul id="listaOrcamento"></ul>
+        <p class="resultado" id="totalOrcamento"></p>
+    </div>
+
+    <script>
+        let listaVidros = [];
+    
+        function mostrarFormulario(tipo) {
+            document.getElementById("formTemperado").style.display = "none";
+            document.getElementById("formComum").style.display = "none";
+    
+            if (tipo === "temperado") {
+                document.getElementById("formTemperado").style.display = "block";
+            } else if (tipo === "comum") {
+                document.getElementById("formComum").style.display = "block";
+            }
+        }
+    
+        function calcularPreco(tipo) {
+            let largura, altura, quantidade, valorMetroQuadrado, precoTotal;
+    
+            if (tipo === "temperado") {
+                largura = parseFloat(document.getElementById("larguraTemp").value);
+                altura = parseFloat(document.getElementById("alturaTemp").value);
+                quantidade = parseInt(document.getElementById("quantidadeTemp").value);
+                valorMetroQuadrado = parseFloat(document.getElementById("valorTemp").value);
+            } else {
+                largura = parseFloat(document.getElementById("larguraComum").value);
+                altura = parseFloat(document.getElementById("alturaComum").value);
+                quantidade = parseInt(document.getElementById("quantidadeComum").value);
+                valorMetroQuadrado = parseFloat(document.getElementById("valorComum").value);
+            }
+    
+            let area = largura * altura;
+            if (isNaN(area) || area <= 0 || quantidade < 1 || isNaN(valorMetroQuadrado) || valorMetroQuadrado <= 0) {
+                alert("Insira valores válidos!");
+                return;
+            }
+    
+            precoTotal = area * valorMetroQuadrado * quantidade;
+    
+            if (tipo === "temperado") {
+                document.getElementById("precoTemperado").innerText = `Preço por vidro: R$ ${precoTotal.toFixed(2)}`;
+            } else {
+                document.getElementById("precoComum").innerText = `Preço por vidro: R$ ${precoTotal.toFixed(2)}`;
+            }
+        }
+    
+        function adicionarAoOrcamento(tipo) {
+            let largura, altura, espessura, quantidade, valorMetroQuadrado, precoTotal, modelovidro;
+    
+            if (tipo === "temperado") {
+                largura = parseFloat(document.getElementById("larguraTemp").value);
+                altura = parseFloat(document.getElementById("alturaTemp").value);
+                quantidade = parseInt(document.getElementById("quantidadeTemp").value);
+                valorMetroQuadrado = parseFloat(document.getElementById("valorTemp").value);
+                modelovidro = document.getElementById("modelovidroTemp").value;
+                let selectEspessura = document.getElementById("espessuraTemp");
+                espessura = selectEspessura.options[selectEspessura.selectedIndex].text;
+            } else {
+                largura = parseFloat(document.getElementById("larguraComum").value);
+                altura = parseFloat(document.getElementById("alturaComum").value);
+                quantidade = parseInt(document.getElementById("quantidadeComum").value);
+                valorMetroQuadrado = parseFloat(document.getElementById("valorComum").value);
+                modelovidro = document.getElementById("modelovidroComum").value;
+                let selectEspessura = document.getElementById("espessuraComum");
+                espessura = selectEspessura.options[selectEspessura.selectedIndex].text;
+            }
+    
+            let area = largura * altura;
+            if (isNaN(area) || area <= 0 || quantidade < 1 || isNaN(valorMetroQuadrado) || valorMetroQuadrado <= 0) {
+                alert("Insira valores válidos!");
+                return;
+            }
+    
+            precoTotal = area * valorMetroQuadrado * quantidade;
+    
+            let vidro = {
+                tipo: modelovidro.charAt(0).toUpperCase() + modelovidro.slice(1),
+                espessura: espessura,
+                largura: largura,
+                altura: altura,
+                quantidade: quantidade,
+                preco: precoTotal.toFixed(2)
+            };
+    
+            listaVidros.push(vidro);
+            atualizarOrcamento();
+            limparCampos(tipo);
+        }
+    
+        function limparCampos(tipo) {
+            if (tipo === "temperado") {
+                document.getElementById("larguraTemp").value = "";
+                document.getElementById("alturaTemp").value = "";
+                document.getElementById("quantidadeTemp").value = "1";
+                document.getElementById("valorTemp").value = "";
+                document.getElementById("precoTemperado").innerText = "";
+            } else {
+                document.getElementById("larguraComum").value = "";
+                document.getElementById("alturaComum").value = "";
+                document.getElementById("quantidadeComum").value = "1";
+                document.getElementById("valorComum").value = "";
+                document.getElementById("precoComum").innerText = "";
+            }
+        }
+    
+        function atualizarOrcamento() {
+            let lista = document.getElementById("listaOrcamento");
+            let totalOrcamento = document.getElementById("totalOrcamento");
+            lista.innerHTML = "";
+            let total = 0;
+    
+            listaVidros.forEach((vidro, index) => {
+                total += parseFloat(vidro.preco);
+                lista.innerHTML += `<li>${vidro.quantidade}x ${vidro.tipo} - ${vidro.espessura} (${vidro.largura}m x ${vidro.altura}m) = R$ ${vidro.preco} <button onclick="removerVidro(${index})">❌</button></li>`;
+            });
+    
+            totalOrcamento.innerHTML = `<strong>Total do orçamento: R$ ${total.toFixed(2)}</strong>`;
+        }
+    
+        function removerVidro(index) {
+            listaVidros.splice(index, 1);
+            atualizarOrcamento();
+        }
+    </script>
+    
+
+</body>
+</html>

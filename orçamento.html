@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento</title>
+    <link rel="stylesheet" href="estilos/orçamento/orçamento.css">
+</head>
+<body>
+    <header>
+        <div id="imagem"></div>
+        <div>
+            <a href="menu.html">Início</a>
+            <a href="#">Marcar um orçamento</a>
+            <a href="#">Consultar orçamentos marcados</a>
+            <a href="#">Pedidos</a>
+        </div>
+    </header>
+    <main>
+        <h1>Orçamento</h1>
+        <h2>Escolha o vidro:</h2>
+        <label for="tipovidro">
+            <input type="radio" name="tipovidro" value="comum" onclick="mostrarformulario('comum')" >Vidro Comum
+        </label>
+        <label for="tipovidro">
+            <input type="radio" name="tipovidro" value="temperado" onclick="mostrarformulario('temperado')"> Vidro Temperado
+        </label>
+
+        <div id="formcomum" class="form-container">
+            <form action="vidrocomum">
+                <label for="modelovidro">Tipo do Vidro</label>
+                <select name="modelovidrocom" id="modelovidrocom">
+                    <option value="canelado">Canelado</option>
+                    <option value="liso">Liso</option>
+                    <option value="fume">Fumê</option>
+                    <option value="mineboreal">Mineboreal</option>
+                    <option value="pontilhado">pontilhado</option>
+                    <option value="espelho">Espelho</option>
+                </select>    
+                <br>
+
+                <label for="espessura" onchange="calcularpreco('comum')">Espessura</label>
+                <select name="espessuracom" id="espessuracom">
+                    <option value="3mm">3mm</option>
+                    <option value="4mm">4mm</option>
+                    <option value="5mm">5mm</option>
+                    <option value="6mm">6mm</option>
+                    <option value="8mm">8mm</option>
+                    <option value="10mm">10mm</option>
+                </select>
+                <br>
+                <label for="altura">Altura (M)</label>
+                <input type="number" name="altcom" id="altcom" step="0.01" onchange="calcularpreco('comum')">
+                <br>
+
+                <label for="largura">Largura (M)</label>
+                <input type="number" name="larcom" id="larcom" step="0.01" onchange="calcularpreco('comum')">
+                <br>
+
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quancom" min="1" value="1" onchange="calcularpreco('comum')">
+                <br>
+
+                <label for="valormetro">Valor do metro quadrado: (R$)</label>
+                <input type="number" name="precometro" id="precometrocom" onchange="calcularpreco('comum')">
+
+                <p class="resultado" id="precocom"></p>
+                <input type="button" onclick="adicionaraoorcamento('comum')" value="Adicionar">
+            </form>
+        </div>
+
+        <div id="formtemp" class="form-container">
+            <form action="vidrotemp">
+                <label for="Tipo do vidro">Tipo do Vidro</label>
+                <select name="modelovidrotem" id="modelovidrotem">
+                    <option value="incolor">Incolor</option>
+                    <option value="fume">Fumê</option>
+                    <option value="Verde">Verde</option>
+                    <option value="bronze">Bronze</option>
+                </select>
+                <br>
+
+                <label for="espessura" onchange="calcularpreco('temperado')">Espessura</label>
+                <select name="espessuratem" id="espessuratem">Espessura
+                    <option value="6mm">6mm</option>
+                    <option value="8mm">8mm</option>
+                    <option value="10mm">10mm</option>
+                </select>
+                <br>
+
+                <label for="altura">Altura (M)</label>
+                <input type="number" name="altura" id="altemp" step="0.01" onchange="calcularpreco('temperado')">
+                <br>
+
+                <label for="largura">Largura(M)</label>
+                <input type="number" name="largura" id="lartemp" step="0.01" onchange="calcularpreco('temperado')">
+                <br>
+
+                <label for="quantidade">Quantidade</label>
+                <input type="number" name="quantidade" id="quantemp" min="1" value="1" onchange="calcularpreco('temperado')">
+                <br>
+
+                <label for="precotemperado">Valor do metro quadrado: (R$)</label>
+                <input type="number" name="precometro" id="precometrotem" onchange="calcularpreco('temperado')">
+                <br>
+
+                <p class="resultado" id="precotem"></p>
+                <input type="button" onclick="adicionaraoorcamento('temperado')" value="Adicionar" >
+            </form>
+        </div>
+        <div class="preorcamento">
+            <h2>Pré-Orçamento</h2>
+            <ul id="listaorcamento"></ul>
+            <p class="resultado" id="totalorcamento"></p>
+        </div>
+    </main>
+    <script src="javascript/orçamento.js"></script>
+</body>
+</html>

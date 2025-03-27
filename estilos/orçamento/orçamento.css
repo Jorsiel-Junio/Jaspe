@@ -1,0 +1,50 @@
+:root {
+    --cor-borda: #077ddd7a;
+    --cor-background: rgb(240, 240, 240);
+    --cor-link: rgb(112, 110, 110);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-image: linear-gradient(to bottom, rgb(0, 68, 255), rgb(139, 196, 250));
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100vw;
+    height: 20vh;
+}
+
+#imagem {
+    margin-top: -25px;
+    background: url('../../imagens/Jaspe-logo.png') no-repeat;
+    width: 200px;
+    height: 300px;
+    background-size: contain;
+}
+
+a { 
+    padding: 0 10px;
+    font-size: large;
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--cor-link);
+    color: white;
+    font-size: larger;
+}
+main {
+    background-color: var(--cor-background);
+}
+
+.form-container {
+    display: none;
+    
+}
